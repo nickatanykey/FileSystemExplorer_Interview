@@ -12,6 +12,17 @@ public class FileBrowserController : ApiController
     }
 
     [HttpGet]
+    [Route("api/filebrowser/IsHomeDirectorySetUp")]
+    public IHttpActionResult IsHomeDirectorySetUp()
+    {
+        string homePath = this.fileBrowserService.GetHomeDirectoryPath();
+
+        bool isApplicationSetUp = !string.IsNullOrEmpty(homePath);
+
+        return Ok(new { isApplicationSetUp });
+    }   
+
+    [HttpGet]
     [Route("api/filebrowser/getcontents")]
     public IHttpActionResult GetDirectoryContents(string path = "")
     {

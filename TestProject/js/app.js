@@ -1,4 +1,17 @@
-﻿async function fetchDirectoryContents(path) {
+﻿async function isApplicationSetUp() {
+    try {
+        let response = await fetch('api/filebrowser/ishomedirectorysetup');
+        let fetchData = await response.json();
+
+        return fetchData.isApplicationSetUp;
+    }
+    catch (error) {
+        console.error('Fetch error:', error);
+        return false;
+    }
+}
+
+async function fetchDirectoryContents(path) {
     try {
         if (!path)
             path = '';
