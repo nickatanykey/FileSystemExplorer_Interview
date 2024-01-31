@@ -6,5 +6,6 @@ namespace FileBrowser.BLL
     {
         bool IsSecureDirectoryQuery(string fullPath);
         DirectoryModel GetDirectoryContents(string relativePath);
+        string GetHomeDirectoryPath();
     }
 }

@@ -5,14 +5,23 @@ using System;
 
 public class FileBrowserController : ApiController
 {
-    private readonly string homeDirectory;
-
     private readonly IFileBrowserService fileBrowserService;
 
     public FileBrowserController(IFileBrowserService fileBrowserService)
     {
         this.fileBrowserService = fileBrowserService;
     }
+
+    [HttpGet]
+    [Route("api/filebrowser/IsHomeDirectorySetUp")]
+    public IHttpActionResult IsHomeDirectorySetUp()
+    {
+        string homePath = this.fileBrowserService.GetHomeDirectoryPath();
+
+        bool isApplicationSetUp = !string.IsNullOrEmpty(homePath);
+
+        return Ok(new { isApplicationSetUp });
+    }   
 
     [HttpGet]
     [Route("api/filebrowser/getcontents")]

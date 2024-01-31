@@ -83,5 +83,10 @@ namespace FileBrowser.BLL
 
             return directoryContents;
         }
+
+        public string GetHomeDirectoryPath()
+        {
+            return homeDirectory;
+        }
     }
 }
