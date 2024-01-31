@@ -1,9 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{327D68E6-9548-4C90-9A8B-089A43B31FF5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{696E4283-AA8E-4993-A008-077453800EB8} = {696E4283-AA8E-4993-A008-077453800EB8}
+		{FED5E932-6786-46BE-AB71-4C9E0D6DFD70} = {FED5E932-6786-46BE-AB71-4C9E0D6DFD70}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBrowser.BLL", "FileBrowser.BLL\FileBrowser.BLL.csproj", "{FED5E932-6786-46BE-AB71-4C9E0D6DFD70}"
+	ProjectSection(ProjectDependencies) = postProject
+		{696E4283-AA8E-4993-A008-077453800EB8} = {696E4283-AA8E-4993-A008-077453800EB8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBrowser.Domain", "FileBrowser.Domain\FileBrowser.Domain.csproj", "{696E4283-AA8E-4993-A008-077453800EB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBrowser.Test", "FileBrowser.Test\FileBrowser.Test.csproj", "{66A597CA-C95C-41B9-B515-496805CB31B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +28,23 @@ Global
 		{327D68E6-9548-4C90-9A8B-089A43B31FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{327D68E6-9548-4C90-9A8B-089A43B31FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{327D68E6-9548-4C90-9A8B-089A43B31FF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FED5E932-6786-46BE-AB71-4C9E0D6DFD70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FED5E932-6786-46BE-AB71-4C9E0D6DFD70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FED5E932-6786-46BE-AB71-4C9E0D6DFD70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FED5E932-6786-46BE-AB71-4C9E0D6DFD70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{696E4283-AA8E-4993-A008-077453800EB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{696E4283-AA8E-4993-A008-077453800EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{696E4283-AA8E-4993-A008-077453800EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{696E4283-AA8E-4993-A008-077453800EB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66A597CA-C95C-41B9-B515-496805CB31B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66A597CA-C95C-41B9-B515-496805CB31B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66A597CA-C95C-41B9-B515-496805CB31B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66A597CA-C95C-41B9-B515-496805CB31B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D462D4A9-2C6A-4D3F-8F2C-51368951CDFC}
 	EndGlobalSection
 EndGlobal
