@@ -1,7 +1,28 @@
 ﻿body {
 }
 
+h1 {
+    font-family: 'Segoe UI'
+}
+
 #welcomeDialog p {
     margin-bottom: 0;
     font-size: medium;
+}
+
+.folder-icon, .file-icon {
+    margin-right: 5px;
+    font-size: 16px; /* Adjust the size as needed */
+}
+
+.directory, .directory li {
+    margin-left: 20px;
+    margin-top: 10px;
+    list-style-type: none;
+}
+
+#directory-contents {
+    padding: 30px;
+    border: 1px solid grey;
+    border-radius: 5px;
 }

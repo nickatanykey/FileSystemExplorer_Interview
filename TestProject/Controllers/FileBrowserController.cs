@@ -22,7 +22,7 @@ public class FileBrowserController : ApiController
         {
             string homePath = WebConfigurationManager.AppSettings["HomeDirectoryPath"];
 
-            var directoryContents = fileBrowserService.GetDirectoryContents(path);
+            var directoryContents = fileBrowserService.GetDirectoryContents(path ?? string.Empty);
 
             if (directoryContents == null)
             { 

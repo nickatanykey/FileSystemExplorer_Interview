@@ -4,6 +4,8 @@ using Unity.WebApi;
 using FileBrowser.BLL;
 using System.IO.Abstractions;
 using System.Web.Configuration;
+using Unity.Resolution;
+using Unity.Injection;
 
 public static class UnityConfig
 {
@@ -14,7 +16,9 @@ public static class UnityConfig
         string homeDirectory = WebConfigurationManager.AppSettings["HomeDirectoryPath"];
 
         // e.g., container.RegisterType<IProductRepository, ProductRepository>();
-        container.RegisterType<IFileBrowserService, FileBrowserService>();
+        container.RegisterType<IFileBrowserService, FileBrowserService>(
+                new InjectionConstructor(homeDirectory, new FileSystem())
+            );
         container.RegisterType<IFileSystem, FileSystem>();
 
         GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);

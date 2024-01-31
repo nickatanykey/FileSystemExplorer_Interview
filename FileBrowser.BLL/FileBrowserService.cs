@@ -56,6 +56,9 @@ namespace FileBrowser.BLL
 
         public virtual DirectoryModel GetDirectoryContents(string relativePath)
         {
+            if (relativePath == "/")
+                relativePath = string.Empty;
+
             var fullPath = GetSafeFullPath(relativePath);
 
             if (!IsSecureDirectoryQuery(fullPath))

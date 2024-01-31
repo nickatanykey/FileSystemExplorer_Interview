@@ -17,22 +17,24 @@
 
     <h1>File Browser Application</h1>
 
-    <div id="app">
+    <div id="breadcrumbs"></div>
+    <div id="directory-contents"></div>
+    <div id="footer"></div>
 
-    </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
-    <script src="/js/app.js"></script>
+    <script src="/TestProject/js/app.js"></script>
     <script>
         //write a routine that will support deep linking on page load
         //for example, if the user clicks on a link like: index.html/foldername/filename it should load the page and provide that path to an ajax call that will show a file system
         $(document).ready(function () {
             $("#welcomeDialog").dialog();
-
-            fetchDirectoryContents();
+            $("#welcomeDialog").on('dialogclose', function (event) {
+                loadDirectory("/");
+            });
         });
     </script>
 </body>

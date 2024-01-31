@@ -12,10 +12,10 @@ namespace TestProject
     {
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register); // Register Web API routes first
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            UnityConfig.RegisterComponents(); // Register Unity with Web API
+            UnityConfig.RegisterComponents();
         }
     }
 }
