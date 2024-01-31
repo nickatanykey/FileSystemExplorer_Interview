@@ -3,15 +3,16 @@ using System.IO;
 using System;
 using System.IO.Abstractions; // Make sure to include this
 using System.Linq;
+using System.Reflection.Emit;
 
 namespace FileBrowser.BLL
 {
-    public class FileBrowserService : IFileBrowserService
+    public class FileService : IFileService
     {
         private readonly IFileSystem fileSystem;
         private readonly string homeDirectory;
 
-        public FileBrowserService(string homeDirectory, IFileSystem fileSystem)
+        public FileService(string homeDirectory, IFileSystem fileSystem)
         {
             this.fileSystem = fileSystem;
             this.homeDirectory = homeDirectory;
@@ -19,6 +20,11 @@ namespace FileBrowser.BLL
 
         private string GetSafeFullPath(string relativePath)
         {
+            if (string.IsNullOrEmpty(relativePath) || relativePath == "/")
+                relativePath = string.Empty;
+            else if (relativePath.StartsWith("/"))
+                relativePath = relativePath.Substring(1);
+
             // Use IFileSystem.Path to combine and normalize the path
             return fileSystem.Path.GetFullPath(fileSystem.Path.Combine(homeDirectory, relativePath));
         }
@@ -30,7 +36,7 @@ namespace FileBrowser.BLL
                                  select new DirectoryModel
                                  {
                                      Name = dirInfo.Name,
-                                     Path = dirInfo.FullName
+                                     Path = SanitizeOutputPath(dirInfo.FullName)
                                  };
 
             directoryContents.Subdirectories.AddRange(subdirectories);
@@ -43,10 +49,18 @@ namespace FileBrowser.BLL
                         select new FileModel
                         {
                             Name = fileInfo.Name,
-                            Path = fileInfo.FullName
+                            Path = SanitizeOutputPath(fileInfo.FullName)
                         };
 
             directoryContents.Files.AddRange(files);
+        }
+
+        public string SanitizeOutputPath(string outputPath)
+        {
+            if (string.IsNullOrEmpty(outputPath))
+                return "/";
+
+            return outputPath.Replace(homeDirectory, string.Empty).Replace("\\", "/");
         }
 
         public virtual bool IsSecureDirectoryQuery(string fullPath)
@@ -55,10 +69,7 @@ namespace FileBrowser.BLL
         }
 
         public virtual DirectoryModel GetDirectoryContents(string relativePath)
-        {
-            if (relativePath == "/")
-                relativePath = string.Empty;
-
+        { 
             var fullPath = GetSafeFullPath(relativePath);
 
             if (!IsSecureDirectoryQuery(fullPath))
@@ -75,13 +86,47 @@ namespace FileBrowser.BLL
             var directoryContents = new DirectoryModel
             {
                 Name = directoryInfo.Name,
-                Path = directoryInfo.FullName
+                Path = SanitizeOutputPath(directoryInfo.FullName)
             };
 
             AddFiles(directoryContents, fullPath);
             AddSubdirectories(directoryContents, fullPath);
 
             return directoryContents;
+        }
+
+        public Stream GetFile(string relativePath)
+        {
+            // Assuming filePath is an absolute path or relative to a safe root
+            var fullPath = GetSafeFullPath(relativePath);
+            return new FileStream(fullPath, FileMode.Open, FileAccess.Read);
+        }
+
+        public bool FileExists(string relativePath)
+        {
+            var fullPath = GetSafeFullPath(relativePath);
+            return fileSystem.File.Exists(fullPath);
+        }
+
+        public string GetMimeType(string relativePath)
+        {
+            var fullPath = GetSafeFullPath(relativePath);
+            var extension = fileSystem.Path.GetExtension(fullPath).ToLowerInvariant();
+            switch (extension)
+            {
+                case ".txt": 
+                    return "text/plain";
+                case ".pdf": 
+                    return "application/pdf";
+                default: 
+                    return "application/octet-stream";
+            }
+        }
+
+        public string GetFileName(string relativePath)
+        {
+            var fullPath = GetSafeFullPath(relativePath);
+            return fileSystem.FileInfo.New(fullPath).Name;
         }
     }
 }

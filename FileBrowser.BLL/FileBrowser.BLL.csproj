@@ -50,8 +50,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileBrowserService.cs" />
-    <Compile Include="IFileBrowserService.cs" />
+    <Compile Include="FileService.cs" />
+    <Compile Include="IFileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

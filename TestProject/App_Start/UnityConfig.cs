@@ -16,7 +16,7 @@ public static class UnityConfig
         string homeDirectory = WebConfigurationManager.AppSettings["HomeDirectoryPath"];
 
         // e.g., container.RegisterType<IProductRepository, ProductRepository>();
-        container.RegisterType<IFileBrowserService, FileBrowserService>(
+        container.RegisterType<IFileService, FileService>(
                 new InjectionConstructor(homeDirectory, new FileSystem())
             );
         container.RegisterType<IFileSystem, FileSystem>();

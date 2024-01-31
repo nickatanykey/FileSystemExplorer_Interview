@@ -1,15 +1,12 @@
 ﻿using System.Web.Http;
-using System.Web.Configuration;
 using FileBrowser.BLL;
 using System;
 
 public class FileBrowserController : ApiController
 {
-    private readonly string homeDirectory;
+    private readonly IFileService fileBrowserService;
 
-    private readonly IFileBrowserService fileBrowserService;
-
-    public FileBrowserController(IFileBrowserService fileBrowserService)
+    public FileBrowserController(IFileService fileBrowserService)
     {
         this.fileBrowserService = fileBrowserService;
     }
@@ -20,8 +17,6 @@ public class FileBrowserController : ApiController
     {
         try
         {
-            string homePath = WebConfigurationManager.AppSettings["HomeDirectoryPath"];
-
             var directoryContents = fileBrowserService.GetDirectoryContents(path ?? string.Empty);
 
             if (directoryContents == null)

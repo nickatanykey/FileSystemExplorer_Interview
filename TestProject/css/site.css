@@ -26,3 +26,34 @@ h1 {
     border: 1px solid grey;
     border-radius: 5px;
 }
+
+.breadcrumbNav {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+}
+
+    .breadcrumbNavList {
+        list-style: none !important;
+    }
+
+        .breadcrumbNavList li {
+            display: inline;
+            margin: 15px;
+            list-style: none !important;
+        }
+
+.subdirectory-item:hover {
+    cursor: pointer;
+    opacity: .7;
+    background-color: #F0F0F0
+}
+
+.file-item:hover {
+    cursor: pointer;
+    opacity: .7;
+    background-color: #F0F0F0
+}

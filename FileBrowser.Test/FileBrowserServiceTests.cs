@@ -7,12 +7,12 @@ using System.IO;
 [TestFixture]
 public class FileBrowserServiceTests
 {
-    private FileBrowserService fileBrowserService;
+    private FileService fileBrowserService;
 
     [SetUp]
     public void Setup()
     {  
-        fileBrowserService = new FileBrowserService(
+        fileBrowserService = new FileService(
             TestContext.CurrentContext.TestDirectory, 
             new FileSystem()
         );
