@@ -44,6 +44,9 @@
     <Compile Include="DirectoryModel.cs" />
     <Compile Include="FileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchResult.cs" />
+    <Compile Include="SearchResults.cs" />
+    <Compile Include="SearchResultType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

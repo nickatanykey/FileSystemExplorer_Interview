@@ -11,14 +11,14 @@ public class FileBrowserControllerTests
     private Mock<IFileSystem> mockFileSystem;
 
     private Mock<FileService> mockService;
-    private FileBrowserController controller;
+    private BrowserController controller;
 
     [SetUp]
     public void Setup()
     {
         mockFileSystem = new Mock<IFileSystem>();
         mockService = new Mock<FileService>("valid", mockFileSystem.Object);
-        controller = new FileBrowserController(mockService.Object);
+        controller = new BrowserController(mockService.Object);
     }
 
     [Test]

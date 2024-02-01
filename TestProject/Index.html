@@ -13,14 +13,27 @@
         <p>Nicholas Jones</p>
         <p>Phone: 903-423-7900</p>
         <p>Email: jones.nicholas.m@gmail.com</p>
-        <p id="setupError" style="display: none; color: red">Please set up a HomeDirectoryPath appSetting entry in the Web.Config and re-launch to continue.</p>
+        <p id="setupError" style="display: none; color: red">
+        Please set up a HomeDirectoryPath appSetting entry in the Web.Config, ensure the web server user has adequate read and write permissions, and re-launch to continue.
+        </p>
     </div>
 
     <h1>File Browser Application</h1>
-
+    <div id="searchPanel">
+        <input type="text" id="searchInput" placeholder="use * for wildcard" />
+        <button type="button" onclick="search()">Search</button>
+        <button type="button" onclick="clearSearch()">Clear</button>
+        <div id="searchResultsPanel"></div>
+    </div>
     <div id="breadcrumbs"></div>
-    <div id="directory-contents"></div>
-    <div id="footer"></div>
+    <div id="directoryContents"></div>
+    <div id="footer">
+        <div id="itemCountPanel"></div>
+        <div id="uploadFilePanel">
+            <input type="file" id="fileUpload" />
+            <button onclick="uploadFile()">Upload</button>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -38,7 +51,13 @@
                 $("#setupError").show();
             }
 
-           $("#welcomeDialog").on('dialogclose', () => loadDirectory("/"));
+            $("#welcomeDialog").on('dialogclose', loadInitialState);
+
+            window.addEventListener('popstate', function (event) {
+                if (!!event.state && !!event.state.path) {
+                    loadDirectory(event.state.path);
+                }
+            });
         });
     </script>
 </body>
